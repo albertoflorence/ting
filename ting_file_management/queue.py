@@ -12,9 +12,21 @@ class Queue(AbstractQueue):
         self.top = None
         self.tail = None
         self.size = 0
+        self.__current = None
 
     def __len__(self):
         return self.size
+
+    def __iter__(self):
+        self.__current = self.top
+        return self
+
+    def __next__(self):
+        if self.__current is None:
+            raise StopIteration
+        value = self.__current.value
+        self.__current = self.__current.next
+        return value
 
     def enqueue(self, value):
         node = Node(value)
