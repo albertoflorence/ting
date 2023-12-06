@@ -56,3 +56,11 @@ class Queue(AbstractQueue):
 
     def is_empty(self):
         return self.size == 0
+
+    def find(self, func):
+        node = self.top
+        for i in range(self.size):
+            if func(node.value):
+                return node.value
+            node = node.next
+        return None
